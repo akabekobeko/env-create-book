@@ -61,5 +61,7 @@ typings/
 .next
 
 .*
+package-lock.json
+dest/
 
 !.prettierrc
