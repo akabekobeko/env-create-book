@@ -29,19 +29,21 @@ const enumFiles = async (dir: string, files: string[] = []) => {
 }
 
 /**
- * Create an HTML file path for storage.
- * If the original Markdown is located in a sub directory, create that hierarchy too.
+ * Check path of directories and file.
  * @param src Path of source content directory.
  * @param dest Path of output directory.
  * @param file Path of Markdown file.
- * @returns Path of save HTML file.
+ * @returns Information of path.
  */
-const checkSaveFilePath = (src: string, dest: string, file: string) => {
+const checkPath = (src: string, dest: string, file: string) => {
   const dir = path.join(dest, path.dirname(file).slice(src.length))
-  mkdirp.sync(dir)
-
   const name = path.basename(file, '.md')
-  return path.join(dir, `${name}.html`)
+
+  return {
+    dir,
+    file: path.join(dir, `${name}.html`),
+    relative: path.relative(dir, dest)
+  }
 }
 
 /**
@@ -53,11 +55,11 @@ const build = async (src: string, dest: string) => {
   const files = await enumFiles(src)
   for (const file of files) {
     try {
-      console.log(`INFO: src = "${file}"`)
-      const html = await md2html(fs.readFileSync(file, 'utf8'))
-      const savePath = checkSaveFilePath(src, dest, file)
-      fs.writeFileSync(savePath, html)
-      console.log(`INFO: dest = "${savePath}"`)
+      const info = checkPath(src, dest, file)
+      const html = await md2html(fs.readFileSync(file, 'utf8'), info.relative)
+      mkdirp.sync(info.dir)
+      fs.writeFileSync(info.file, html)
+      console.log(`INFO: "${file}" -> "${info.file}"`)
     } catch (err) {
       console.error(`ERROR: ${err}`)
     }

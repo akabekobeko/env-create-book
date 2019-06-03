@@ -19,12 +19,18 @@
     "url": "git+https://github.com/akabekobeko/env-write-ebook.git"
   },
   "scripts": {
-    "build": "ts-node ./src/build/index.ts"
+    "build:clean": "rimraf ./dist",
+    "build:copy-content": "cpx \"src/content/**/!(*.md)\" dist/",
+    "build:css": "node-sass src/scss/app.scss dist/bundle.css -r --source-map true --output-style expanded",
+    "build:html": "ts-node src/build/index.ts -i src/content/ -o dist/",
+    "build:pdf": "savepdf --book -s JIS-B5 dist",
+    "build": "run-s build:clean build:copy-content build:css build:html build:pdf"
   },
   "dependencies": {
     "@paperist/remark-crossref": "^1.0.3",
     "@types/mkdirp": "^0.5.2",
     "@types/refractor": "^2.8.0",
+    "cpx": "^1.5.0",
     "hastscript": "^5.1.0",
     "mdast-util-to-hast": "^6.0.1",
     "mkdirp": "^0.5.1",
