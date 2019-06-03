@@ -1,3 +1,4 @@
+import path from 'path'
 import refractor from 'refractor'
 import visit from 'unist-util-visit'
 import u from 'unist-builder'
@@ -30,6 +31,10 @@ export const highlight = () => (node: any) => {
   })
 }
 
+/**
+ * Copy the `remark-parse-yaml` analysis result to `VFile.data.frontmatter`.
+ * The copied data can be referenced from later processing.
+ */
 export const copyFrontmatter = () => (node: any, file: any) => {
   visit(node, 'yaml', (item: any) => {
     file.data.frontmatter = item.data.parsedValue
@@ -39,9 +44,13 @@ export const copyFrontmatter = () => (node: any, file: any) => {
 /**
  * Combines metadata and HAST to generate a page HAST.
  * The metadata is the YAML parsed in Markdown by `remark-frontmatter` and` remark-parse-yaml`.
+ * @param options Options.
  * @see https://github.com/rehypejs/rehype-document
  */
-export const doc = () => (node: any, file: any) => {
+export const doc = (options: { relativePath: string }) => (
+  node: any,
+  file: any
+) => {
   const head = [
     h('meta', { charset: 'utf-8' }),
     h('meta', { name: 'viewport', content: 'width=s, initial-scale=1.0' }),
@@ -56,7 +65,12 @@ export const doc = () => (node: any, file: any) => {
     body.unshift(h('h1', [title]))
   }
 
-  head.push(h('link', { rel: 'stylesheet', href: 'main.css' }))
+  head.push(
+    h('link', {
+      rel: 'stylesheet',
+      href: path.join(options.relativePath, 'bundle.css')
+    })
+  )
 
   return u('root', [
     u('doctype', { name: 'html' }),

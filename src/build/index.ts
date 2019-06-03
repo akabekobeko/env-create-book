@@ -6,7 +6,7 @@ import build from './build'
  * @returns Option settings generated from parsed results.
  */
 const parseArgv = (argv: string[]) => {
-  const options = { src: 'src/content', dest: 'dest' }
+  const options = { src: 'src/content', dest: 'src/assets' }
   for (let i = 0; i < argv.length; ++i) {
     const value = argv[i]
     switch (value) {

@@ -9,13 +9,14 @@ import stringify from 'rehype-stringify'
 import raw from 'rehype-raw'
 import format from 'rehype-format'
 import { highlight, copyFrontmatter, doc } from './remark'
-import { image, crossReference, footnote } from './rehype'
+import { image, code, crossReference, footnote } from './rehype'
 
 /**
  * Convert markdown to HTML.
  * @param md Markdown text.
+ * @param relativePath Relative path from root directory.
  */
-const md2html = (md: string): Promise<string> => {
+const md2html = (md: string, relativePath: string): Promise<string> => {
   return new Promise((resolve, reject) => {
     unified()
       .use(markdown)
@@ -28,12 +29,13 @@ const md2html = (md: string): Promise<string> => {
       .use(rehype, {
         allowDangerousHTML: true,
         handlers: {
-          image,
+          code,
           crossReference,
-          footnote
+          footnote,
+          image
         }
       })
-      .use(doc)
+      .use(doc as any, { relativePath })
       .use(raw)
       .use(format)
       .use(stringify)
