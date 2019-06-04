@@ -1,0 +1,15 @@
+@import './variables.scss';
+
+nav#toc {
+  font-size: 1.2;
+}
+
+h1,
+h2,
+h3 {
+  font-feature-settings: 'palt';
+}
+
+p {
+  font-feature-settings: 'palt';
+}
