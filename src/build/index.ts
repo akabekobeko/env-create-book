@@ -6,7 +6,7 @@ import build from './build'
  * @returns Option settings generated from parsed results.
  */
 const parseArgv = (argv: string[]) => {
-  const options = { src: 'src/content', dest: 'src/assets' }
+  const options = { src: 'src/content', dest: 'src/assets', watch: false }
   for (let i = 0; i < argv.length; ++i) {
     const value = argv[i]
     switch (value) {
@@ -23,6 +23,14 @@ const parseArgv = (argv: string[]) => {
           options.dest = argv[++i]
         }
         break
+
+      case '-w':
+      case '--watch':
+        options.watch = true
+        break
+
+      default:
+        break
     }
   }
 
@@ -30,4 +38,4 @@ const parseArgv = (argv: string[]) => {
 }
 
 const options = parseArgv(process.argv.slice(2))
-build(options.src, options.dest)
+build(options.src, options.dest, options.watch)
