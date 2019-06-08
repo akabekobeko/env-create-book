@@ -1,8 +1,8 @@
 import path from 'path'
 import refractor from 'refractor'
 import visit from 'unist-util-visit'
-import u from 'unist-builder'
 import h from 'hastscript'
+import page from './page'
 
 /**
  * Highlighting the `code` block contained in Markdown.
@@ -45,6 +45,7 @@ export const copyFrontmatter = () => (node: any, file: any) => {
  * Combines metadata and HAST to generate a page HAST.
  * The metadata is the YAML parsed in Markdown by `remark-frontmatter` and` remark-parse-yaml`.
  * @param options Options.
+ * @returns HAST.
  * @see https://github.com/rehypejs/rehype-document
  */
 export const doc = (options: { relativePath: string }) => (
@@ -54,29 +55,12 @@ export const doc = (options: { relativePath: string }) => (
   const head = [
     h('meta', { charset: 'utf-8' }),
     h('meta', { name: 'viewport', content: 'width=s, initial-scale=1.0' }),
-    h('meta', { 'http-equiv': 'X-UA-Compatible', content: 'ie=edge' })
-  ]
-
-  const body = node.children.concat()
-  const title = file.data.frontmatter ? file.data.frontmatter.title : undefined
-
-  if (title) {
-    head.push(h('title', [title]))
-    body.unshift(h('h1', [title]))
-  }
-
-  head.push(
+    h('meta', { 'http-equiv': 'X-UA-Compatible', content: 'ie=edge' }),
     h('link', {
       rel: 'stylesheet',
       href: path.join(options.relativePath, 'bundle.css')
     })
-  )
+  ]
 
-  return u('root', [
-    u('doctype', { name: 'html' }),
-    h('html', { lang: 'ja' }, [
-      h('head', head),
-      h('article', [h('body', body)])
-    ])
-  ])
+  return page(head, node.children.concat(), file.data.frontmatter)
 }

@@ -9,7 +9,7 @@ import stringify from 'rehype-stringify'
 import raw from 'rehype-raw'
 import format from 'rehype-format'
 import { highlight, copyFrontmatter, doc } from './remark'
-import { image, code, crossReference, footnote } from './rehype'
+import { code, crossReference, footnote, image } from './rehype'
 
 /**
  * Convert markdown to HTML.
