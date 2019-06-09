@@ -45,7 +45,6 @@ export const copyFrontmatter = () => (node: any, file: any) => {
  * Combines metadata and HAST to generate a page HAST.
  * The metadata is the YAML parsed in Markdown by `remark-frontmatter` and` remark-parse-yaml`.
  * @param options Options.
- * @returns HAST.
  * @see https://github.com/rehypejs/rehype-document
  */
 export const doc = (options: { relativePath: string }) => (
@@ -63,4 +62,27 @@ export const doc = (options: { relativePath: string }) => (
   ]
 
   return page(head, node.children.concat(), file.data.frontmatter)
+}
+
+/**
+ * Checks that the specified URL is an absolute path including the URI Scheme.
+ * @param url URL.
+ * @see https://github.com/sindresorhus/is-absolute-url
+ */
+const isAbsoluteURL = (url: string) => {
+  return /^[a-z][a-z\d+.-]*:/.test(url)
+}
+
+/**
+ * Convert links to Markdown files into HTML. e.g. `"sample.md"`, `"dir/test.md"`.
+ * Resolve the link after HTML conversion while making the link consistent as Makdown.
+ * Links that contain URI Scheme are not targets. e.g. `"https://example.com/readme.md"`.
+ */
+export const linkMd2Html = () => (node: any, file: any) => {
+  visit(node, 'link', (item: any) => {
+    const url = item.url as string
+    if (!isAbsoluteURL(url) && url.endsWith('.md')) {
+      item.url = `${url.replace(/\.[^/.]+$/, '')}.html`
+    }
+  })
 }
