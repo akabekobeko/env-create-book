@@ -8,8 +8,8 @@ import ruby from 'remark-ruby'
 import stringify from 'rehype-stringify'
 import raw from 'rehype-raw'
 import format from 'rehype-format'
-import { highlight, copyFrontmatter, doc } from './remark'
-import { image, code, crossReference, footnote } from './rehype'
+import { highlight, copyFrontmatter, doc, linkMd2Html } from './remark'
+import { code, crossReference, footnote, image } from './rehype'
 
 /**
  * Convert markdown to HTML.
@@ -24,6 +24,7 @@ const md2html = (md: string, relativePath: string): Promise<string> => {
       .use(parseFrontmatter)
       .use(copyFrontmatter as any)
       .use(highlight as any)
+      .use(linkMd2Html as any)
       .use(crossref as any)
       .use(ruby)
       .use(rehype, {

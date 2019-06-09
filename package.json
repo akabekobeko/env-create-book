@@ -29,7 +29,7 @@
     "watch:copy-content": "cpx \"src/content/**/!(*.md)\" dist/ -w",
     "watch:css": "node-sass src/scss/app.scss dist/bundle.css -w -r --source-map true --output-style expanded",
     "watch:md": "ts-node src/build/index.ts -i src/content/ -o dist/ -w",
-    "watch": "run-p watch:*",
+    "watch": "npm-run-all -s build:css -p watch:*",
     "preview": "savepdf --book --preview dist/"
   },
   "dependencies": {

@@ -1,8 +1,8 @@
 import path from 'path'
 import refractor from 'refractor'
 import visit from 'unist-util-visit'
-import u from 'unist-builder'
 import h from 'hastscript'
+import page from './page'
 
 /**
  * Highlighting the `code` block contained in Markdown.
@@ -54,29 +54,35 @@ export const doc = (options: { relativePath: string }) => (
   const head = [
     h('meta', { charset: 'utf-8' }),
     h('meta', { name: 'viewport', content: 'width=s, initial-scale=1.0' }),
-    h('meta', { 'http-equiv': 'X-UA-Compatible', content: 'ie=edge' })
-  ]
-
-  const body = node.children.concat()
-  const title = file.data.frontmatter ? file.data.frontmatter.title : undefined
-
-  if (title) {
-    head.push(h('title', [title]))
-    body.unshift(h('h1', [title]))
-  }
-
-  head.push(
+    h('meta', { 'http-equiv': 'X-UA-Compatible', content: 'ie=edge' }),
     h('link', {
       rel: 'stylesheet',
       href: path.join(options.relativePath, 'bundle.css')
     })
-  )
+  ]
 
-  return u('root', [
-    u('doctype', { name: 'html' }),
-    h('html', { lang: 'ja' }, [
-      h('head', head),
-      h('article', [h('body', body)])
-    ])
-  ])
+  return page(head, node.children.concat(), file.data.frontmatter)
+}
+
+/**
+ * Checks that the specified URL is an absolute path including the URI Scheme.
+ * @param url URL.
+ * @see https://github.com/sindresorhus/is-absolute-url
+ */
+const isAbsoluteURL = (url: string) => {
+  return /^[a-z][a-z\d+.-]*:/.test(url)
+}
+
+/**
+ * Convert links to Markdown files into HTML. e.g. `"sample.md"`, `"dir/test.md"`.
+ * Resolve the link after HTML conversion while making the link consistent as Makdown.
+ * Links that contain URI Scheme are not targets. e.g. `"https://example.com/readme.md"`.
+ */
+export const linkMd2Html = () => (node: any, file: any) => {
+  visit(node, 'link', (item: any) => {
+    const url = item.url as string
+    if (!isAbsoluteURL(url) && url.endsWith('.md')) {
+      item.url = `${url.replace(/\.[^/.]+$/, '')}.html`
+    }
+  })
 }
