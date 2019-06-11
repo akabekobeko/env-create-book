@@ -1,0 +1,26 @@
+{
+  "rules": {
+    "ja-hiragana-hojodoushi": true,
+    "ja-no-abusage": true,
+    "ja-no-redundant-expression": true,
+    "ja-no-successive-word": true,
+    "max-kanji-continuous-len": true,
+    "max-ten": true,
+    "no-doubled-conjunction": true,
+    "no-doubled-conjunctive-particle-ga": true,
+    "no-doubled-joshi": true,
+    "no-dropping-the-ra": true,
+    "no-mix-dearu-desumasu": true,
+    "no-mixed-zenkaku-and-hankaku-alphabet": true,
+    "no-nfd": true,
+    "preset-ja-spacing": {
+      "ja-space-around-code": {
+        "before": true,
+        "after": true
+      },
+      "ja-space-between-half-and-full-width": {
+        "space": "always"
+      }
+    }
+  }
+}
