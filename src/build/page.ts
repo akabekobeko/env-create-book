@@ -28,7 +28,7 @@ const content = (head: any, body: any, meta: Metadata) => {
     u('doctype', { name: 'html' }),
     h('html', { lang: 'ja' }, [
       h('head', head),
-      h('body', [h('article', body)])
+      h('body', { role: 'doc-chapter' }, [h('article', body)])
     ])
   ])
 }
@@ -45,13 +45,23 @@ const toc = (head: any, body: any, meta: Metadata = {}) => {
     head.push(h('title', [meta.title]))
   }
 
+  const cover = []
+  const toc = []
+  for (const value of body) {
+    if (value.type === 'element' && value.tagName === 'ul') {
+      toc.push(h('nav', { id: 'toc', role: 'doc-toc' }, value))
+    } else {
+      cover.push(value)
+    }
+  }
+
+  const content = [h('section', { id: 'cover', role: 'doc-cover' }, cover), toc]
+
   return u('root', [
     u('doctype', { name: 'html' }),
     h('html', { lang: 'ja' }, [
       h('head', head),
-      h('body', [
-        h('article', [h('nav', { id: 'toc', role: 'doc-toc' }, body)])
-      ])
+      h('body', { role: 'doc-chapter' }, [h('article', content)])
     ])
   ])
 }

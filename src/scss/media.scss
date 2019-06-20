@@ -82,6 +82,7 @@
   size: $page-width $page-height;
   margin-top: $page-margin-top;
   margin-bottom: $page-margin-bottom - 6mm;
+  marks: crop cross;
 
   @top-left-corner {
     @include page-top-style();
@@ -117,6 +118,34 @@
     margin-right: -$page-bleed;
     background-color: $color_white;
     z-index: 1000;
+  }
+}
+
+// Cover page
+@page :first {
+  margin: 0;
+  background-color: $color_red;
+
+  @top-left {
+    content: '';
+  }
+  @top-center {
+    content: none;
+  }
+  @top-right {
+    content: '';
+  }
+
+  @bottom-center {
+    content: none;
+  }
+  @bottom-left {
+    content: '';
+    border: none;
+  }
+  @bottom-right {
+    content: '';
+    border: none;
   }
 }
 
@@ -160,25 +189,8 @@
   }
 }
 
-@page :first {
-  @bottom-left {
-    content: '';
-    border: none;
-  }
-  @bottom-right {
-    content: '';
-    border: none;
-  }
-  @top-left {
-    content: '';
-  }
-  @top-right {
-    content: '';
-  }
-}
-
 // style for footnote top borders
-@-adapt-footnote-area ::before {
+@-adapt-footnote-area::before {
   margin-inline-start: -1000px;
   margin-inline-end: 70%;
   margin-block-end: 0.8em;

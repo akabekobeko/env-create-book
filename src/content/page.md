@@ -7,7 +7,7 @@ author: ['akabeko']
 
 ## 見出し
 
-サンプル code`サンプル
+サンプル `code` サンプル
 
 サンプル test サンプル (sample) サンプル
 サンプル
