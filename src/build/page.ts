@@ -24,11 +24,12 @@ const content = (head: any, body: any, meta: Metadata) => {
     body.unshift(h('h1', [meta.title]))
   }
 
+  const options = { role: 'doc-chapter', className: meta.type || undefined }
   return u('root', [
     u('doctype', { name: 'html' }),
     h('html', { lang: 'ja' }, [
       h('head', head),
-      h('body', { role: 'doc-chapter' }, [h('article', body)])
+      h('body', options, [h('article', body)])
     ])
   ])
 }
