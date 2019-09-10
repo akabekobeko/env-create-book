@@ -7,6 +7,9 @@ author: ['akabeko']
 
 ## 見出し
 
+アカベコマイリ [^1]
+[^1]: アカベコマイリ https://akabeko.me/blog/
+
 サンプル `code` サンプル
 
 サンプル test サンプル (sample) サンプル

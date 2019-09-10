@@ -1,5 +1,4 @@
 import u from 'unist-builder'
-import all from 'mdast-util-to-hast'
 
 /**
  * Process `code` on `remark-rehype`.
@@ -46,16 +45,6 @@ export const crossReference = (h: any, node: any) => {
         []
       )
     )
-}
-
-/**
- * Process `foornote` on `remark-rehype`..
- * @param h Processer of HAST.
- * @param node Node of HAST.
- * @returns HAST.
- */
-export const footnote = (h: any, node: any) => {
-  return h(node, 'span', { className: ['footnote'] }, all(h, node))
 }
 
 /**

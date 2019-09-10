@@ -9,7 +9,7 @@ import stringify from 'rehype-stringify'
 import raw from 'rehype-raw'
 import format from 'rehype-format'
 import { highlight, copyFrontmatter, doc, linkMd2Html } from './remark'
-import { code, crossReference, footnote, image } from './rehype'
+import { code, crossReference, image } from './rehype'
 
 /**
  * Convert markdown to HTML.
@@ -19,7 +19,7 @@ import { code, crossReference, footnote, image } from './rehype'
 const md2html = (md: string, relativePath: string): Promise<string> => {
   return new Promise((resolve, reject) => {
     unified()
-      .use(markdown)
+      .use(markdown, { footnotes: true })
       .use(frontmatter, ['yaml', 'toml'])
       .use(parseFrontmatter)
       .use(copyFrontmatter as any)
@@ -32,7 +32,6 @@ const md2html = (md: string, relativePath: string): Promise<string> => {
         handlers: {
           code,
           crossReference,
-          footnote,
           image
         }
       })
