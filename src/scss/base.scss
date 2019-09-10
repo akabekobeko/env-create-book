@@ -1,51 +1,41 @@
 @import './variables.scss';
 
-nav#toc {
-  break-before: page;
-  font-size: 1.2;
-
-  li a::after {
-    content: target-counter(attr(href), page);
-  }
-
-  li a {
-    display: inline-flex;
-    width: 100%;
-    text-decoration: none;
-    color: currentColor;
-    align-items: baseline;
-  }
-
-  li a::before {
-    margin-left: 0.5em;
-    margin-right: 0.5em;
-    border-bottom: solid 1px;
-    content: '';
-    order: 1;
-    flex: auto;
-  }
-
-  li a::after {
-    text-align: right;
-    content: target-counter(attr(href), page);
-    align-self: flex-end;
-    flex: none;
-    order: 2;
-  }
-}
-
 h1,
 h2,
 h3 {
   font-feature-settings: 'palt';
 }
 
+a {
+  text-decoration: none;
+  color: $color_blue;
+}
+
+a:visited {
+  color: $color_purple;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: $color_red;
+}
+
 p {
   font-feature-settings: 'palt';
 }
 
-#cover {
-  h1 {
-    color: $color_white;
+.footnote-ref {
+  text-decoration: none;
+
+  &:visited {
+    color: $color_blue;
+  }
+
+  &::before {
+    content: '[';
+  }
+
+  &::after {
+    content: ']';
   }
 }
