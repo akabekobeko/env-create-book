@@ -16,9 +16,9 @@ Run `npm run build` to build a PDF with **Vivliostyle.js** and **vivliostyle-sav
 
 ### Watch & Preview
 
-Execute `npm start` for the mode of **HTML/CSS** conversion automatically when **Markdown/SCSS** change is detected. Press <kbd>Ctrl</kbd> + <kbd>C</kbd> to abort.
+Execute `npm start` for the mode of **HTML/CSS** conversion automatically when **Markdown/SCSS** change is detected, and preview. Press <kbd>Ctrl</kbd> + <kbd>C</kbd> to abort.
 
-Run `npm run preview` to preview the HTML/CSS view in Vivliostyle. Chrome launches and starts previewing. The interruption is <kbd>Ctrl</kbd> + <kbd>C</kbd>.
+To run watch and preview separately, use `npm run watch` and `npm run preview`.
 
 ## Writing content
 
@@ -39,6 +39,21 @@ Cover page
 - [Sample 2](sub/sample.html)
 ```
 
+Other pages are not limited except metadata YAML.
+
+```markdown
+---
+title: 'My Page'
+author: ['Author']
+type: 'page'
+---
+
+# My Page
+
+A very interesting sentence.
+```
+
+
 ### Metadata
 
  The metadata at the top of the page is in [YAML](https://yaml.org/) format. Currently supports the following:
@@ -47,7 +62,7 @@ Cover page
 |---|---|---|
 |`title`|`string`|Title of page. When converted to HTML, it is specified in the `<title>` element.|
 |`author`|`string[]`|Author of page. It is used for page index etc.|
-|`type`|`string`|Type of page. `toc` can be specified only in `index.md`, which means that it has (generates) multiple pages and their indexes. If specified otherwise, it is set to the `class` attribute of the `<body>` element.|
+|`type`|`string`|Type of page. `toc` can be specified only in `index.md`, which means that it has (generates) multiple pages and their indexes. If specified otherwise, it is set to the `class` attribute of the `<body>` element. e.g. `<body class="type">`.|
 
 ### Generate multiple page and indexing
 
