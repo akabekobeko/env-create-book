@@ -1,35 +1,88 @@
 ---
-title: 'サンプル'
+title: 'Sample'
 author: ['akabeko']
 ---
 
-2019/5/18 (土) に開催された [redmine.tokyo 第 16 回勉強会](https://redmine.tokyo/projects/shinared/wiki/%E7%AC%AC16%E5%9B%9E%E5%8B%89%E5%BC%B7%E4%BC%9A)の感想。
+# Header 1
 
-## 見出し
+## Header 2
 
-アカベコマイリ [^1]
-[^1]: アカベコマイリ https://akabeko.me/blog/
+### Header 3
 
-サンプル `code` サンプル
+#### Header 4
 
-サンプル test サンプル (sample) サンプル
-サンプル
+###### Header 5
 
-ユニット テスト
+![アカベコ画像](akabeko.png "アカベコ") この写真の赤べこは民芸品として有名な福島県ではなく長野県の善光寺にある仲見世通りの土産屋で購入したものです。
 
-- テスト
-- テスト
+[リンク](https://example.com/)です。GFM なら https://example.com/ のように URL も自動的にリンク化されます。
 
-1. Value 1
-2. Value 2
+脚注テスト [^1] <span>HTML Span</span>
+[^1]: 脚注テキスト https://akabeko.me/blog/
 
-| Header | Header |
-| ------ | ------ |
-| Value  | Value  |
-| Value  | Value  |
-| Value  | Value  |
-| Value  | Value  |
-| Value  | Value  |
+コードに関係するものはシングル クォーテーションで囲むと `code` のようになります。
+
+ルビが利用できると「"{不運}^(ハードラック)"と"{踊}^(ダンス)"っちまったんだよ...」みたいな表現も可能です。
+
+**Strong 1** __Strong 2__
+*Italic 1* _Italic 2_
+~~Strike~~
+
+## Header Line
+
+---
+***
+
+## Text
+
+「ではみなさんは、そういうふうに川だと云われたり、乳の流れたあとだと云われたりしていたこのぼんやりと白いものがほんとうは何かご承知ですか。」先生は、黒板に吊した大きな黒い星座の図の、上から下へ白くけぶった銀河帯のようなところを指しながら、みんなに問をかけました。
+
+カムパネルラが手をあげました。それから四五人手をあげました。ジョバンニも手をあげようとして、急いでそのままやめました。たしかにあれがみんな星だと、いつか雑誌で読んだのでしたが、このごろはジョバンニはまるで毎日教室でもねむく、本を読むひまも読む本もないので、なんだかどんなこともよくわからないという気持ちがするのでした。
+
+## Quote
+
+> Nest 1
+>
+> > Nest 2
+> >
+> > > Nest 3
+> > > Nest 3
+> >
+> > Nest 2
+>
+> Nest 1
+
+## List
+
+- List
+- List
+  - List
+      - List
+      - List
+- List
+  1. List
+  2. List
+      1. List
+      2. List
+
+1. List
+    - List
+    - List
+2. List
+    - List
+    - List
+
+## Table
+
+| Normal | Center | Left | Right  |
+| ------ | :----: | :--- | -----: |
+| A      | A      | A    | A      |
+| B      | B      | B    | B      |
+| C      | C      | C    | C      |
+
+## Code Block
+
+JavaScript
 
 ```js
 const value = 'value'
@@ -38,7 +91,7 @@ if (value) {
 }
 ```
 
-<span>Span</span>
+HTML
 
 ```html
 <!DOCTYPE html>
@@ -57,9 +110,3 @@ if (value) {
   </body>
 </html>
 ```
-
-![画像](sample.png '画像')
-
-This plugin works on {Markdown AST}^(MDAST).
-
-"{不運}^(ハードラック)"と"{踊}^(ダンス)"っちまったんだよ...
