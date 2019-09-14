@@ -53,24 +53,23 @@ type: 'page'
 A very interesting sentence.
 ```
 
-
 ### Metadata
 
- The metadata at the top of the page is in [YAML](https://yaml.org/) format. Currently supports the following:
+The metadata at the top of the page is in [YAML](https://yaml.org/) format. Currently supports the following:
 
-|Property|Type|Value|
-|---|---|---|
-|`title`|`string`|Title of page. When converted to HTML, it is specified in the `<title>` element.|
-|`author`|`string[]`|Author of page. It is used for page index etc.|
-|`type`|`string`|Type of page. `toc` can be specified only in `index.md`, which means that it has (generates) multiple pages and their indexes. If specified otherwise, it is set to the `class` attribute of the `<body>` element. e.g. `<body class="type">`.|
+| Property | Type       | Value                                                                                                                                                                                                                                          |
+| -------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `title`  | `string`   | Title of page. When converted to HTML, it is specified in the `<title>` element.                                                                                                                                                               |
+| `author` | `string[]` | Author of page. It is used for page index etc.                                                                                                                                                                                                 |
+| `type`   | `string`   | Type of page. `toc` can be specified only in `index.md`, which means that it has (generates) multiple pages and their indexes. If specified otherwise, it is set to the `class` attribute of the `<body>` element. e.g. `<body class="type">`. |
 
 ### Generate multiple page and indexing
 
 To add a page other than the cover page, do the following:
 
- 1. Define `type: 'toc'` in page metadata
- 2. Define links of other pages in `ul` and `li` elements
+1.  Define `type: 'toc'` in page metadata
+2.  Define links of other pages in `ul` and `li` elements
 
- ## License
+## License
 
-[MIT](LICENSE)
+[AGPL Version 3](LICENSE)

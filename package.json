@@ -3,7 +3,7 @@
   "description": "Environment of write the book with Vivliostyle/vivliostyle-savepdf.",
   "version": "1.0.0",
   "author": "akabeko",
-  "license": "MIT",
+  "license": "AGPL-3.0",
   "private": true,
   "engines": {
     "node": ">= 10"
