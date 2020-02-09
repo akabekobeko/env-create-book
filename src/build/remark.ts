@@ -3,12 +3,13 @@ import refractor from 'refractor'
 import visit from 'unist-util-visit'
 import h from 'hastscript'
 import page from './page'
+import { Node } from 'unist'
 
 /**
  * Highlighting the `code` block contained in Markdown.
  */
-export const highlight = () => (node: any) => {
-  visit(node, 'code', (node: any) => {
+export const highlight = () => (tree: Node) => {
+  visit(tree, 'code', (node: any) => {
     let { lang, data, value } = node
     if (!lang || !refractor.registered(lang)) {
       return
@@ -35,8 +36,8 @@ export const highlight = () => (node: any) => {
  * Copy the `remark-parse-yaml` analysis result to `VFile.data.frontmatter`.
  * The copied data can be referenced from later processing.
  */
-export const copyFrontmatter = () => (node: any, file: any) => {
-  visit(node, 'yaml', (item: any) => {
+export const copyFrontmatter = () => (tree: Node, file: any) => {
+  visit(tree, 'yaml', (item: any) => {
     file.data.frontmatter = item.data.parsedValue
   })
 }
@@ -78,8 +79,8 @@ const isAbsoluteURL = (url: string) => {
  * Resolve the link after HTML conversion while making the link consistent as Makdown.
  * Links that contain URI Scheme are not targets. e.g. `"https://example.com/readme.md"`.
  */
-export const linkMd2Html = () => (node: any, file: any) => {
-  visit(node, 'link', (item: any) => {
+export const linkMd2Html = () => (tree: Node, file: any) => {
+  visit(tree, 'link', (item: any) => {
     const url = item.url as string
     if (!isAbsoluteURL(url) && url.endsWith('.md')) {
       item.url = `${url.replace(/\.[^/.]+$/, '')}.html`
