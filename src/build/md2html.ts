@@ -3,7 +3,6 @@ import markdown from 'remark-parse'
 import rehype from 'remark-rehype'
 import frontmatter from 'remark-frontmatter'
 import parseFrontmatter from 'remark-parse-yaml'
-import crossref from '@paperist/remark-crossref'
 import ruby from 'remark-ruby'
 import stringify from 'rehype-stringify'
 import raw from 'rehype-raw'
@@ -22,10 +21,9 @@ const md2html = (md: string, relativePath: string): Promise<string> => {
       .use(markdown, { footnotes: true })
       .use(frontmatter, ['yaml', 'toml'])
       .use(parseFrontmatter)
-      .use(copyFrontmatter as any)
-      .use(highlight as any)
-      .use(linkMd2Html as any)
-      .use(crossref as any)
+      .use(copyFrontmatter)
+      .use(highlight)
+      .use(linkMd2Html)
       .use(ruby)
       .use(rehype, {
         allowDangerousHTML: true,
@@ -35,7 +33,7 @@ const md2html = (md: string, relativePath: string): Promise<string> => {
           image
         }
       })
-      .use(doc as any, { relativePath })
+      .use(doc, { relativePath })
       .use(raw)
       .use(format)
       .use(stringify)
