@@ -1,9 +1,30 @@
 @import './variables.scss';
 
+:root {
+  font-family: $font-family;
+  font-weight: 400;
+  line-height: 1.7;
+}
+
 h1,
 h2,
 h3 {
-  font-feature-settings: 'palt';
+  font-feature-settings: 'palt', 'calt';
+}
+
+h1 {
+  font-size: 2.4rem;
+  line-height: 1.2;
+}
+
+h2 {
+  font-size: 1.8rem;
+  line-height: 1.2;
+}
+
+h3 {
+  font-size: 1.4rem;
+  line-height: 1.2;
 }
 
 a {
@@ -21,21 +42,6 @@ a:hover {
 }
 
 p {
-  font-feature-settings: 'palt';
-}
-
-.footnote-ref {
-  text-decoration: none;
-
-  &:visited {
-    color: $color_blue;
-  }
-
-  &::before {
-    content: '[';
-  }
-
-  &::after {
-    content: ']';
-  }
+  font-feature-settings: 'calt';
+  text-align: justify;
 }
