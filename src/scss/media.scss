@@ -27,6 +27,11 @@
     vertical-align: super;
     background-color: rgba(214, 255, 0, 0.4);
     margin: 0 0.1rem;
+    line-height: 0;
+
+    a {
+      word-break: break-all;
+    }
   }
 
   a[data-ref='sec'],
@@ -75,6 +80,11 @@
   th,
   td {
     break-inside: avoid;
+  }
+
+  .footnote {
+    float: footnote;
+    text-align: left;
   }
 }
 
@@ -194,4 +204,7 @@
   margin-inline-start: -1000px;
   margin-inline-end: 70%;
   margin-block-end: 0.8em;
+}
+@-adapt-footnote-area {
+  word-break: break-all;
 }

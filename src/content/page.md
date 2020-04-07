@@ -18,7 +18,13 @@ author: ['akabeko']
 [リンク](https://example.com/)です。GFM なら https://example.com/ のように URL も自動的にリンク化されます。
 
 脚注テスト [^1] <span>HTML Span</span>
+
+
+Here is a footnote reference,[^Z]
+
 [^1]: 脚注テキスト https://akabeko.me/blog/
+
+[^Z]: Here is the footnote.
 
 コードに関係するものはシングル クォーテーションで囲むと `code` のようになります。
 

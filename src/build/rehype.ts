@@ -1,4 +1,5 @@
 import u from 'unist-builder'
+import all from 'mdast-util-to-hast/lib/all'
 
 /**
  * Process `code` on `remark-rehype`.
@@ -16,7 +17,7 @@ export const code = (h: any, node: any) => {
     // `Prism.js` also requires language specification for `<pre>`
     const props = { className: ['language-' + lang] }
     return h(node.position, 'pre', props, [
-      h(node, 'code', props, [u('text', value)])
+      h(node, 'code', props, [u('text', value)]),
     ])
   } else {
     return h(node.position, 'pre', [h(node, 'code', {}, [u('text', value)])])
@@ -40,7 +41,7 @@ export const crossReference = (h: any, node: any) => {
         {
           href: `#${match[2]}`,
           className: 'crossref',
-          'data-ref': match[1]
+          'data-ref': match[1],
         },
         []
       )
@@ -67,4 +68,14 @@ export const image = (h: any, node: any) => {
   }
 
   return h(node, 'figure', null, children)
+}
+
+/**
+ * Process `footnote` on `remark-rehype`..
+ * @param h Processer of HAST.
+ * @param node Node of HAST.
+ * @returns HAST.
+ */
+export const footnote = (h: any, node: any) => {
+  return h(node, 'span', { className: ['footnote'] }, all(h, node))
 }

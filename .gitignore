@@ -66,4 +66,5 @@ package-lock.json
 dist/
 
 !.prettierrc
+!.prettierignore
 !.textlintrc
