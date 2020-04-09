@@ -19,7 +19,7 @@
     "url": "git+https://github.com/akabekobeko/env-write-ebook.git"
   },
   "scripts": {
-    "start": "run-p watch preview",
+    "start": "npm run watch",
     "lint": "textlint ./src/content/**",
     "tsc": "tsc --rootDir ./src/build/ --noEmit --skipLibCheck",
     "build:clean": "rimraf ./dist",
@@ -31,7 +31,7 @@
     "watch:copy-content": "cpx \"src/content/**/!(*.md)\" dist/ -w",
     "watch:css": "node-sass src/scss/app.scss dist/bundle.css -w -r --source-map true --output-style expanded",
     "watch:md": "ts-node src/build/index.ts -i src/content/ -o dist/ -w",
-    "watch": "npm-run-all -s build:css -p watch:*",
+    "watch": "npm-run-all -s build:clean build:css build:md -p watch:* preview",
     "preview": "vivliostyle preview dist/ --book"
   },
   "dependencies": {

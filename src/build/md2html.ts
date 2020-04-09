@@ -9,7 +9,7 @@ import stringify from 'rehype-stringify'
 import raw from 'rehype-raw'
 import format from 'rehype-format'
 import { highlight, copyFrontmatter, doc, linkMd2Html } from './remark'
-import { code, crossReference, image, footnote } from './rehype'
+import { code, crossReference, image } from './rehype'
 
 /**
  * Convert markdown to HTML.
@@ -28,13 +28,12 @@ const md2html = (md: string, relativePath: string): Promise<string> => {
       .use(ruby)
       .use(footnotes, { inlineNotes: true })
       .use(rehype, {
-        allowDangerousHTML: true,
+        allowDangerousHtml: true,
         handlers: {
           code,
           crossReference,
-          image,
-          footnote,
-        },
+          image
+        }
       })
       .use(doc, { relativePath })
       .use(raw)
