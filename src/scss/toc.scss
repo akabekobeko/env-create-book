@@ -2,7 +2,7 @@
 
 nav#toc {
   break-before: page;
-  font-size: 1.2;
+  font-size: 120%;
 
   li a::after {
     content: target-counter(attr(href), page);
